@@ -8,6 +8,6 @@ Write the following command into the terminal:
 
 `npm run electron`
 
-##Dependencies
+## Dependencies
 - `node.js`
 
