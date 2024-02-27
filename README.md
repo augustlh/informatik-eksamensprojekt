@@ -9,5 +9,5 @@ Write the following command into the terminal:
 `npm run electron`
 
 ## Dependencies
-- `node.js`
+- `node.js` : https://nodejs.org/en
 
