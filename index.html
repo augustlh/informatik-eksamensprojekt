@@ -14,9 +14,44 @@
     <title>Hello from Electron renderer!</title>
   </head>
   <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
-    <p id="info"></p>
+    <section id="sidebar"></section>
+    <div id="wrapper">
+      <section class="wrapper">
+        <div class="inner">
+          <h1>Login</h1>
+
+          <form action="Hovedside.html">
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="username"
+            /><br /><br />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="password"
+            />
+            <br /><br />
+            <input id="login" type="submit" value="Login" /><br />
+            <label id="tekst" for="new"
+              ><a href="https://www.youtube.com/"
+                ><!-- skal ændres til lav bruger side-->
+                Har ikke en bruger? Lav en nu</a
+              ></label
+            >
+            <label id="tekst" for="glemt"
+              ><a style="padding-left: 10px" href="https://www.reddit.com/"
+                >Glemt password
+                <!--ændres til glemt passward side --></a
+              ></label
+            >
+          </form>
+        </div>
+        <p id="info"></p>
+      </section>
+    </div>
   </body>
   <script src="./renderer.js"></script>
 </html>
