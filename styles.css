@@ -1,5 +1,10 @@
+:root {
+  --main-bg-color: #3e4048;
+  --main-nav-color: #223360;
+}
+
 body {
-  background: #3e4048;
+  background: var(--main-bg-color);
 }
 
 input {
@@ -66,13 +71,18 @@ h1 {
 }
 
 #navbar {
-  background: #223360;
+  background-color: var(--main-nav-color);
   opacity: 0.62;
   height: 500px;
   position: fixed;
   width: 280px;
-  display: flex;
-  align-items: center;
+}
+
+.elements {
+  width: 280px;
+  height: auto;
+  display: grid;
+  align-content: center;
   justify-content: center;
 }
 
@@ -80,14 +90,14 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  position: fixed;
   overflow: auto;
 }
 
 li a {
   display: block;
   color: #fff;
-  padding: 8px 16px;
+  text-align: center;
+  padding: 20px 90px;
   text-decoration: none;
 }
 
@@ -95,4 +105,23 @@ li a:hover:not(.active) {
   background-color: #354f97;
   opacity: 1;
   color: white;
+}
+
+#header {
+  height: 35px;
+  width: auto;
+  display: grid;
+  align-content: center;
+  background-color: var(--main-nav-color);
+}
+
+#profil {
+  height: 30px;
+  width: 30px;
+  margin-right: 50px;
+  float: right;
+}
+
+#profil:hover {
+  cursor: pointer;
 }
