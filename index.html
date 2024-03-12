@@ -15,42 +15,42 @@
   </head>
   <body>
     <section id="sidebar"></section>
-    <div id="wrapper">
-      <section class="wrapper">
-        <div class="inner">
-          <h1>Login</h1>
+    <div class="wrapper">
+      <div class="inner">
+        <h1>Login</h1>
 
-          <form action="Hovedside.html">
-            <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="username"
-            /><br /><br />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="password"
-            />
-            <br /><br />
-            <input id="login" type="submit" value="Login" /><br />
-            <label id="tekst" for="new"
-              ><a href="https://www.youtube.com/"
-                ><!-- skal ændres til lav bruger side-->
-                Har ikke en bruger? Lav en nu</a
-              ></label
-            >
-            <label id="tekst" for="glemt"
-              ><a style="padding-left: 10px" href="https://www.reddit.com/"
-                >Glemt password
-                <!--ændres til glemt passward side --></a
-              ></label
-            >
-          </form>
-        </div>
+        <form action="Hovedside.html">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="username"
+          /><br /><br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+          />
+          <br /><br />
+          <input id="login" type="submit" value="Login" /><br />
+          <label class="tekst" for="new"
+            ><a href="https://www.youtube.com/"
+              ><!-- skal ændres til lav bruger side-->
+              Har ikke en bruger? Lav en nu</a
+            ></label
+          >
+          <label class="tekst" for="glemt" id="glemt"
+            ><a href="https://www.reddit.com/"
+              >Glemt password
+              <!--ændres til glemt passward side --></a
+            ></label
+          >
+        </form>
+      </div>
+      <div class="footer">
         <p id="info"></p>
-      </section>
+      </div>
     </div>
   </body>
   <script src="./renderer.js"></script>
