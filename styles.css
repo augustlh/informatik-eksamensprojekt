@@ -3,6 +3,10 @@
   --main-nav-color: #223360;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: var(--main-bg-color);
 }
@@ -76,6 +80,7 @@ h1 {
   height: 500px;
   position: fixed;
   width: 280px;
+  float: left;
 }
 
 .elements {
@@ -115,13 +120,41 @@ li a:hover:not(.active) {
   background-color: var(--main-nav-color);
 }
 
-#profil {
+#profilBillede {
   height: 30px;
   width: 30px;
   margin-right: 50px;
   float: right;
 }
 
-#profil:hover {
+#profilBillede:hover {
   cursor: pointer;
+}
+
+#Profil {
+  float: right;
+  width: auto;
+  height: 700;
+  margin-left: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#Favoriter {
+  float: right;
+}
+
+#Ny {
+  float: right;
+}
+
+#alle {
+  float: right;
+}
+
+section::after {
+  content: "";
+  display: table;
+  clear: both;
 }

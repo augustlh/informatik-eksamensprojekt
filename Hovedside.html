@@ -9,16 +9,58 @@
   <body>
     <section id="header">
       <div>
-        <img id="profil" src="Profil billede.png" alt="" onclick="myfunc()" />
+        <img
+          id="profilBillede"
+          src="Profil billede.png"
+          alt=""
+          onclick="toProfile()"
+        />
       </div>
     </section>
-    <section id="navbar">
-      <div class="elements">
-        <ul>
-          <li><a href="">Profil</a></li>
-          <li><a href="">Favoriter</a></li>
-          <li><a href="">Ny collection</a></li>
-        </ul>
+    <section>
+      <div id="navbar">
+        <div class="elements">
+          <ul>
+            <li><a onclick="toProfile()">Profil</a></li>
+            <li><a onclick="toFav()">Favoriter</a></li>
+            <li><a onclick="toNew()">Ny collection</a></li>
+            <li><a onclick="toAll()">Alle</a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="Profil" style="display: none">
+        <div id="center">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            fuga magnam perspiciatis quas saepe pariatur illum rem fugiat eum
+            quidem vero reprehenderit reiciendis, libero dolorem nihil facere?
+            Sed, libero vel.
+          </p>
+        </div>
+      </div>
+      <div id="Favoriter" style="display: none">
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque
+          reprehenderit blanditiis, nesciunt repellendus rem corporis nihil
+          placeat deserunt vel repudiandae dicta officiis unde cumque voluptas
+          odit officia laboriosam! Expedita, quibusdam.
+        </p>
+      </div>
+      <div id="Ny" style="display: none">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa modi
+          officiis harum obcaecati maxime. Molestias in voluptatibus id earum
+          ducimus doloribus fugiat tempora blanditiis deserunt? Perspiciatis
+          numquam officiis dolorum! Neque?
+        </p>
+      </div>
+      <div id="alle" style="display: none">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+          numquam autem similique? Quia aut cupiditate dicta, tenetur culpa, est
+          perspiciatis esse quisquam quaerat animi delectus temporibus a
+          tempore, voluptatibus porro!
+        </p>
       </div>
     </section>
     <script src="test.js"></script>
