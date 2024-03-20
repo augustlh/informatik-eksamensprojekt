@@ -9,6 +9,9 @@
   <body>
     <section id="header">
       <div>
+        <button class="Modal_Open">Lav ny password</button>
+      </div>
+      <div>
         <img
           id="profilBillede"
           src="Profil billede.png"
@@ -29,40 +32,43 @@
         </div>
       </div>
       <div id="Profil" style="display: none">
-        <div id="center">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            fuga magnam perspiciatis quas saepe pariatur illum rem fugiat eum
-            quidem vero reprehenderit reiciendis, libero dolorem nihil facere?
-            Sed, libero vel.
-          </p>
-        </div>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+          fuga magnam perspiciatis quas saepe pariatur illum rem fugiat eum
+          quidem vero reprehenderit reiciendis, libero dolorem nihil facere?
+          Sed, libero vel.
+        </p>
       </div>
       <div id="Favoriter" style="display: none">
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque
-          reprehenderit blanditiis, nesciunt repellendus rem corporis nihil
-          placeat deserunt vel repudiandae dicta officiis unde cumque voluptas
-          odit officia laboriosam! Expedita, quibusdam.
-        </p>
+        <div class="content">
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
       </div>
       <div id="Ny" style="display: none">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa modi
-          officiis harum obcaecati maxime. Molestias in voluptatibus id earum
-          ducimus doloribus fugiat tempora blanditiis deserunt? Perspiciatis
-          numquam officiis dolorum! Neque?
-        </p>
+        <div class="content">
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
       </div>
       <div id="alle" style="display: none">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-          numquam autem similique? Quia aut cupiditate dicta, tenetur culpa, est
-          perspiciatis esse quisquam quaerat animi delectus temporibus a
-          tempore, voluptatibus porro!
-        </p>
+        <div class="content">
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
       </div>
     </section>
+
+    <dialog class="modal" id="modal">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
+        recusandae a asperiores fugiat deserunt tempore necessitatibus ducimus
+        dolore quasi blanditiis natus inventore laudantium rem delectus, nihil
+        fuga minima quidem sed?
+      </p>
+      <button class="Modal_close">luk</button>
+    </dialog>
+
     <script src="test.js"></script>
   </body>
 </html>
