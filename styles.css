@@ -46,6 +46,9 @@ h1 {
   color: aliceblue;
   padding: 0 5em;
 }
+#login:hover {
+  cursor: pointer;
+}
 
 #sidebar {
   background: #37373a;
@@ -110,6 +113,7 @@ li a:hover:not(.active) {
   background-color: #354f97;
   opacity: 1;
   color: white;
+  cursor: pointer;
 }
 
 #header {
@@ -186,8 +190,16 @@ li a:hover:not(.active) {
 }
 
 .Modal_Open {
-  float: inline-start;
+  float: left;
+  padding: 5px;
+  font-size: 20px;
+  color: white;
   cursor: pointer;
+  background-color: #1b284b;
+  margin-top: 2px;
+  margin-left: 10px;
+  border: 1px;
+  border-radius: 2px;
 }
 
 .Modal_close {

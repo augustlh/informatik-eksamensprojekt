@@ -9,9 +9,7 @@
   <body>
     <section id="header">
       <div>
-        <button class="Modal_Open">Lav ny password</button>
-      </div>
-      <div>
+        <button class="Modal_Open">Nyt password</button>
         <img
           id="profilBillede"
           src="Profil billede.png"
@@ -60,13 +58,29 @@
     </section>
 
     <dialog class="modal" id="modal">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-        recusandae a asperiores fugiat deserunt tempore necessitatibus ducimus
-        dolore quasi blanditiis natus inventore laudantium rem delectus, nihil
-        fuga minima quidem sed?
-      </p>
-      <button class="Modal_close">luk</button>
+      <div class="container">
+        <form action="">
+          <div class="row">
+            <p>Opret password</p>
+            <label for="wname"><i class="web-name"></i>Hjemmeside navn</label>
+            <input type="text" id="wname" name="Website" placeholder="google" />
+            <label for="uname"><i class="url-name"></i>Hjemmeside URL</label>
+            <input
+              type="text"
+              id="uname"
+              name="URL"
+              placeholder="www.google.com"
+            />
+            <label for="tags"><i class="tags"></i>Vælg tags</label>
+            <select name="tags" id="tags">
+              <option value=""></option>
+              <option value="favoriter">Favoriter</option>
+            </select>
+            <input type="submit" value="Lav password" class="btn" />
+          </div>
+        </form>
+      </div>
+      <button class="Modal_close">Annuller</button>
     </dialog>
 
     <script src="test.js"></script>
