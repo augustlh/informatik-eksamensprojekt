@@ -1,4 +1,4 @@
-pro = document.getElementById("Profil");
+const pro = document.getElementById("Profil");
 
 // variabler for modal
 const modal = document.querySelector("#modal");
@@ -16,25 +16,4 @@ closeModal.addEventListener("click", () => {
 
 function toProfile() {
   pro.style.display = "block";
-}
-
-async function loadUserData() {
-  try {
-    const response = await fetch("user_test.json");
-    if (!response.ok) {
-      throw new Error("Fandt ikke respons");
-    }
-    const data = await response.json();
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.error("problem med fetch");
-  }
-}
-
-function call() {
-  loadUserData().then((data) => {
-    console.log(data);
-  });
-  location.replace("hovedside.html");
 }
