@@ -1,20 +1,38 @@
 import { fetchData } from "./start.js";
 
+window.showInfo = function (infoObject) {
+  // Assuming you have a <div> with id="sjov" to display the information
+  let infoHtml = "";
+  for (const key in infoObject) {
+    if (infoObject.hasOwnProperty(key)) {
+      infoHtml += `<p id="tekst">${key}: ${infoObject[key]}</p>`;
+      //infoHtml += `<br>`;
+    }
+  }
+  document.getElementById("sjov").innerHTML = infoHtml;
+};
+
 function generateNavbar(data) {
-  console.log(data);
-  let navbarHtml = "<ul>";
   data.forEach((item) => {
-    navbarHtml += `<li><a href="${item.website}">${
-      (item.username, item.website)
-    }</a></li>`;
+    const button = document.createElement("button");
+    button.textContent = item.username;
+    button.setAttribute("id", "sites");
+    button.onclick = function () {
+      showInfo({
+        username: item.username,
+        website: item.website,
+        password: item.password,
+      });
+    };
+    document.getElementById("navbar").appendChild(button);
+    document.getElementById("navbar").appendChild(document.createElement("br"));
   });
-  navbarHtml += "</ul>";
-  return navbarHtml;
 }
 
-fetchData().then((data) => {
-  // Generate and update the navbar here
-  const navbarHtml = generateNavbar(data);
-  document.getElementById("navbar").innerHTML = navbarHtml;
-  console.log(data);
+document.addEventListener("DOMContentLoaded", () => {
+  fetchData().then((data) => {
+    // Generate and update the navbar here
+    generateNavbar(data);
+    console.log(data);
+  });
 });

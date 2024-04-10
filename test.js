@@ -4,7 +4,7 @@ const pro = document.getElementById("Profil");
 const modal = document.querySelector("#modal");
 const openModal = document.querySelector(".Modal_Open");
 const closeModal = document.querySelector(".Modal_close");
-// sættter lytter der lytter efter klik for at vise modal og genstarter stjerner
+// sættter lytter der lytter efter klik for at vise modal
 openModal.addEventListener("click", () => {
   pro.style.display = "none";
   modal.showModal();
@@ -14,6 +14,7 @@ closeModal.addEventListener("click", () => {
   modal.close();
 });
 
-function toProfile() {
+window.toProfile = function () {
+  const pro = document.getElementById("Profil");
   pro.style.display = "block";
-}
+};
