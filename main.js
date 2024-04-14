@@ -1,8 +1,9 @@
 //const { app, BrowserWindow } = require("electron/main");
 //const path = require("node:path");
 
-import { app, BrowserWindow } from "electron/main";
+import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
+import { getUser } from "./database.js";
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -34,3 +35,16 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+/*
+
+ipcMain.handle("get-user", async (event, email) => {
+  try {
+    const user = await getUser(email);
+    return user;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+});
+*/
