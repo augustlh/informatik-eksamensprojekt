@@ -207,3 +207,19 @@ li a:hover:not(.active) {
   cursor: pointer;
   font-size: 1em;
 }
+
+#sjov {
+  float: inline-start;
+  width: auto;
+  height: 700;
+  margin-left: 290px;
+}
+
+#tekst {
+  float: none;
+  color: white;
+}
+
+#sites {
+  margin: 10px;
+}
