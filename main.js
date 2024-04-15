@@ -3,6 +3,7 @@
 
 import { app, BrowserWindow } from "electron/main";
 import path from "node:path";
+import { deleteDatabasePool } from "./database";
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -17,6 +18,7 @@ const createWindow = () => {
 
   // Open the DevTools.
   win.webContents.openDevTools();
+  
 };
 
 app.whenReady().then(() => {
@@ -31,6 +33,7 @@ app.whenReady().then(() => {
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
+    deleteDatabasePool();
     app.quit();
   }
 });

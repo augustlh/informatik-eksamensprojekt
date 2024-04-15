@@ -12,7 +12,7 @@
   "keywords": [],
   "description": "",
   "devDependencies": {
-    "electron": "^29.0.0"
+    "electron": "^29.2.0"
   },
   "dependencies": {
     "crypto": "^1.0.1",
