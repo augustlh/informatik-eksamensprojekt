@@ -1,6 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import { loginUser } from './database.js';
+import { getUserVaults, loginUser, getVaultEntries} from './database.js';
 
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -33,8 +33,12 @@ app.get('/', (req, res, next) => {
     }
 });
 
-app.get('/abe', checkCookie, (req, res) => {
+app.get('/abe', checkCookie, async (req, res) => {
     res.sendFile(join(__dirname, 'public', 'abe.html'));
+    let vaults = await getUserVaults(req.cookies.user_id);
+    let entries = await getVaultEntries(vaults[0]);
+    console.log(vaults);
+    console.log(entries);
 });
 
 app.post("/login", async (req, res) => {

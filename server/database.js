@@ -66,9 +66,9 @@ async function loginUser(email, password) {
     deleteDatabasePool();
 }
 
-async function getUserVaults(user){
+async function getUserVaults(id){
     if(!pool) pool = createDatabasePool();
-    const [rows] = await pool.promise().query('SELECT * from vaults WHERE user_id = ? ', [user.id])
+    const [rows] = await pool.promise().query('SELECT * from vaults WHERE user_id = ? ', [id])
     if(rows.length === 0){
         return undefined;
     }
