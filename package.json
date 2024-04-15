@@ -15,7 +15,6 @@
     "electron": "^29.0.0"
   },
   "dependencies": {
-    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "mysql2": "^3.9.4"
   }

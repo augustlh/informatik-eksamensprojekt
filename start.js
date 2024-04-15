@@ -14,10 +14,31 @@ async function loadUserData() {
 
 export const fetchData = () => loadUserData();
 
-document.addEventListener("DOMContentLoaded", (event) => {
-  const loginForm = document.getElementById("loginForm");
-  loginForm.addEventListener("submit", (event) => {
+import { loginUser } from "./database.js";
+
+// In your renderer process
+const hash = window.electronCrypto.createHash("sha256");
+hash.update("some data");
+console.log(hash.digest("hex"));
+
+document
+  .getElementById("loginForm")
+  .addEventListener("submit", async (event) => {
     event.preventDefault();
-    location.replace("hovedside.html");
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    try {
+      const user = await loginUser(email, password);
+      if (user) {
+        // Login successful, redirect to the main page or perform other actions
+        console.log("Login successful for user:", user.email);
+        // For example, redirect to the main page
+        // window.location.href = 'hovedside.html';
+      } else {
+        // Login failed, display an error message
+        console.error("Login failed. Please check your email and password.");
+      }
+    } catch (error) {
+      console.error("An error occurred during login:", error);
+    }
   });
-});

@@ -5,8 +5,8 @@
 // npm install mysql2
 // npm install dotenv
 
-import mysql from "mysql2";
-import dotenv from "dotenv";
+import mysql from "./node_modules/mysql2/index.js";
+import dotenv from "./node_modules/dotenv/lib/main.js";
 
 import { encrypt, decrypt, hash, generateSalt } from "./encryption.js";
 
@@ -78,6 +78,7 @@ async function loginUser(email, password) {
     return user;
   } else {
     console.log("De indtastede oplysninger er forkerte");
+    return 0;
   }
   deleteDatabasePool();
 }

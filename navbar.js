@@ -1,5 +1,6 @@
 import { fetchData } from "./start.js";
 import { modal } from "./test.js";
+import { getUser } from "./database.js";
 
 window.showInfo = function (infoObject) {
   // Assuming you have a <div> with id="sjov" to display the information
@@ -29,14 +30,15 @@ function generateNavbar(data) {
     document.getElementById("navbar").appendChild(document.createElement("br"));
   });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  fetchData().then((data) => {
+document.addEventListener("", async () => {
+  try {
+    const data = await getUser("august@gov.kr");
     // Generate and update the navbar here
     generateNavbar(data);
     console.log(data);
-    modal.close();
-  });
+  } catch (error) {
+    console.error("Failed to get user:", error);
+  }
 });
 
 document.getElementById("myForm").addEventListener("submit", function (event) {
@@ -46,6 +48,7 @@ document.getElementById("myForm").addEventListener("submit", function (event) {
   const data = Object.fromEntries(formData.entries());
 
   console.log(data);
+  modal.close();
 });
 
 /*
