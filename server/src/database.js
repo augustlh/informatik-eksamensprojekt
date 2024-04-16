@@ -72,6 +72,12 @@ async function getUser(email){
     return rows[0];
 }
 
+async function getUserById(id){
+    if(!pool) pool = createDatabasePool();
+    const [rows] = await pool.promise().query('SELECT * FROM users WHERE id = ?', [id]);
+    return rows[0];
+}
+
 /**
  * Validates a user by email and password
  * @param {string} email
@@ -215,4 +221,4 @@ async function logoutUser() {
     deleteDatabasePool();
 }
 
-export { createDatabasePool, createUser, loginUser, logoutUser, getUserVaults, createVault, getVaultEntries, createEntry, decryptEntry, getEntriesWithWebsite, deleteDatabasePool, getUser, validateUser };
+export { createDatabasePool, createUser, loginUser, logoutUser, getUserVaults, createVault, getVaultEntries, createEntry, decryptEntry, getEntriesWithWebsite, deleteDatabasePool, getUser, validateUser, getUserById};

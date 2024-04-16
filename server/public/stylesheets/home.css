@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 60px 1fr;
+}
+
+.navbar {
+    background-color: #32373d;
+    border: 1px solid #1c1f23;
+    grid-column: 2 / 3;
+    grid-row: 1/2;
+}
+
+.navbar .container {
+    height : 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.search input[type="text"] {
+    padding: 10px 200px;
+    border-radius: 25px;
+    border: 1px solid #2a2e33;
+    background-color: #2a2e33;
+    color: #666;
+    cursor: not-allowed;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.search input[type="text"]::placeholder {
+    color: #999;
+    text-align: center;
+}
+
+.search input[type="text"]:focus {
+    outline: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
+
+#new-item-btn {
+    padding: 8px 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#new-item-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.sidebar {
+    background-color: #0e223e;
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+
+}
+
+/* .main {
+    background-color: #ffff;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    display: grid;
+    grid-template-columns: 500px 1fr;
+}
+
+.entries {
+    display: grid;
+    background-color: #ffff;
+    border: 1px solid #1c1f23;
+}
+
+.entry {
+    display: grid;
+    background-color: #ffff;
+    border: 1px solid #1c1f23;
+} */
+
+.main {
+    display: flex;
+    background-color: #32373d
+}
+
+.entries {
+    flex: 3.5;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    border: 1px solid #1c1f23;
+    padding: 10px;
+}
+
+.entry{
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 8px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.entry:hover{
+    background-color: #1363be49;
+}
+
+.entry-website{
+    font-size: 22px;
+}
+
+.entry-username{
+    font-size: 16px;
+    color: #99a8bb;
+}
+
+.entry-selected{
+    background-color: #1363be! important;
+}
+
+.entry-info {
+    flex: 6.5;
+    border: 1px solid #1c1f23;;
+    padding: 10px;
+}
+
+.sidebar .logo {
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: large;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sidebar .head {
+    height: 40px;
+    display: flex;
+}
+
+.user-info {
+    flex-grow: 1;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.user-info .name {
+    font-size: calc(0.3rem + 1vw);
+    font-weight: 400;
+    margin: 0;
+    overflow: hidden;
+}
+
+.user-info .email {
+    font-size: calc(0.2rem + 0.5vw);
+    font-weight: 500;
+    color: #e4dfdf;
+    text-transform: uppercase;
+    margin: 0;
+    overflow: hidden;
+}
+
+.menu{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #2b9bcf34;
+}
+
+.menu .title{
+    font-size: 14px;
+    font-weight: 500;
+    color: #e0dede;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.menu ul li{
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+.menu ul li a{
+    display: flex;;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 8px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.menu ul li:hover a{
+    background-color: #518ec71c;
+}
+
+.menu ul li.active a{
+    background-color: #518ec775;
+}
+
+.menu ul li .icon {
+    font-size: 20px;
+}
+
+.nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+/* Items */
+.item {
+    padding: 10px;
+    border-bottom: 1px solid #1c1f23;
+    border-radius: 10px;
+}
+
+.item .item-website{
+    font-size: 30px;
+}
+
+.item .item-email{
+    font-size: 20px;
+}

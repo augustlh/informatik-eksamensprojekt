@@ -2,7 +2,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 
-import { getUserVaults, loginUser, getVaultEntries, createUser } from './src/database.js';
+import { getUserVaults, loginUser, getVaultEntries, createUser, getUserById } from './src/database.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
@@ -48,6 +48,16 @@ app.use('/scripts', (req, res, next) => {
     });
 });
 
+app.use('/images', (req, res, next) => {
+    const imagePath = join(__dirname, 'public', 'images', req.path);
+    fs.readFile(imagePath, (err, data) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        res.type('image').send(data);
+    });
+});
 
 /**
  * Middleware function to check if the user has a cookie with a user_id.
@@ -118,6 +128,19 @@ app.get('/vaults', checkCookie, async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to retrieve vaults' });
+    }
+});
+
+app.get('/user', checkCookie, async (req, res) => {
+    // Gets the user_id from the cookie
+    const userID = req.cookies.user_id;
+    try {
+        // Gets the user details and sends them as a JSON response
+        const user = await getUserById(userID);
+        res.json({ user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to retrieve user details' });
     }
 });
 

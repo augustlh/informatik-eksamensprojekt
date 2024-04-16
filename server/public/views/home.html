@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="stylesheets/home.css">
+    <title>OnePass - Home</title>
     <script>
         function logout() {
             fetch('/logout', { method: 'POST', redirect: 'follow'})
@@ -15,7 +17,76 @@
     </script>
 </head>
 <body>
-    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui maxime, temporibus, sint odio veniam cupiditate repellendus dolore quis expedita corporis laboriosam possimus corrupti delectus architecto voluptatum earum a, laudantium necessitatibus?</h1>
-    <button onclick="logout()">Logout</button>
+    <header class="navbar">
+        <div class="container">
+            <div class="search">
+                <input type="text" placeholder="Search for logins (not yet implemented)" disabled>
+            </div>
+
+            <div class="buttons">
+                <button id="new-item-btn">
+                    <i class="ph ph-plus"></i> New Item
+                </button>
+            </div>
+            
+        </div>
+    </header>
+
+    <section class="sidebar">
+        <div class="logo">
+                <span class="logo-text">OnePass</span>
+        </div>
+
+        <div class="head">
+            <div class="user-info">
+                <p class="name"></p>
+                <p class="email"></p>
+            </div>
+        </div>
+        <div class="nav">
+            <div class="menu">
+                <p class="title">Main</p>
+                <ul>
+                    <li class="active">
+                        <a href="home">
+                            <i class="ph ph-key"></i>
+                            <span class = "text">All Entries</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="menu">
+                <p class="title">Vaults</p>
+                <ul class="vault-list">
+                    <!-- Her tilføjes vaults dynamisk -->
+                </ul>
+            </div>
+        </div>
+        <div class="menu">
+            <p class="title">Account</p>
+            <ul>
+                <li>
+                    <a onclick="logout()">
+                        <i class="ph ph-sign-out"></i>
+                        <span class = "text">Logout</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </section>
+
+
+    <main class="main">
+        <div class="entries">
+            <!-- Entries will be displayed here -->
+        </div>
+        <div class="entry-info">
+            <!-- Selected entry info will be displayed here -->
+        </div>
+    </main>
+    
+
+    <script src="scripts/home.js"></script>
 </body>
 </html>
