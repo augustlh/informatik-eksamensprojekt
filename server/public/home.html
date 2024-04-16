@@ -97,6 +97,12 @@
         }
     </style>
     <script>
+        function logout() {
+            fetch('/logout', { method: 'POST', redirect: 'follow'})
+            .then(response => {
+                window.location.href = response.redirected ? response.url : '/';
+            });
+        }
         function displayDetails(entry) {
             // Function to display details of the selected entry
             var detailsDiv = document.getElementById("details");
@@ -141,12 +147,6 @@
                 });
         }
 
-        function logout() {
-            fetch('/logout', { method: 'POST', redirect: 'follow'})
-            .then(response => {
-                window.location.href = response.redirected ? response.url : '/';
-            });
-        }
 
         // Function to add an entry (You can replace the alert with your actual logic)
         function addEntry() {

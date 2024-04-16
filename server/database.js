@@ -1,12 +1,19 @@
+// Imports module dependencies
 import mysql from 'mysql2'
 import dotenv from 'dotenv'
 
 import { encrypt, decrypt, hash, generateSalt } from './encryption.js'
 
+// Configures the environment variables
 dotenv.config()
 
+// Defines a global variable to store the database pool
 let pool = null;
 
+/**
+ * Function to create a new mysql pool
+ * @returns {mysql.Pool} - A new mysql pool
+ */
 function createDatabasePool() {
     return mysql.createPool({
         host: process.env.DB_HOST,
@@ -17,6 +24,10 @@ function createDatabasePool() {
     })
 }
 
+/**
+ * Function to delete the database pool
+ * @returns {void}
+ */
 function deleteDatabasePool() {
     if (pool){
         pool.end();
@@ -24,6 +35,14 @@ function deleteDatabasePool() {
     }
 }
 
+/**
+ * Function to create a new user in the database
+ * @param {string} name - The name of the user
+ * @param {string} email - The email of the user
+ * @param {string} password - The password of the user
+ * @returns {Promise<boolean>} - A promise that resolves to true if the user is created, false otherwise
+ * @async
+ */
 async function createUser(name, email, password) {
     if(!pool) pool = createDatabasePool();
     const [existingUser] = await pool.promise().query('SELECT * FROM users WHERE email = ?', [email]);
