@@ -18,7 +18,8 @@ function checkCookie(req, res, next) {
     if (userID) {
         next();
     } else {
-        res.status(403).send('<h1>403: Forbidden</h1>');
+        //res.status(403).send('<h1>403: Forbidden</h1>');
+        res.redirect('/');
     }
 }
 
@@ -27,14 +28,14 @@ function checkCookie(req, res, next) {
 app.get('/', (req, res, next) => {
     const userID = req.cookies && req.cookies.user_id;
     if (userID) {
-        res.redirect('/abe');
+        res.redirect('/home');
     } else {
         res.sendFile(join(__dirname, 'public', 'index.html'));
     }
 });
 
-app.get('/abe', checkCookie, async (req, res) => {
-    res.sendFile(join(__dirname, 'public', 'abe.html'));
+app.get('/home', checkCookie, async (req, res) => {
+    res.sendFile(join(__dirname, 'public', 'home.html'));
     let vaults = await getUserVaults(req.cookies.user_id);
     let entries = await getVaultEntries(vaults[0]);
     console.log(vaults);
@@ -44,13 +45,11 @@ app.get('/abe', checkCookie, async (req, res) => {
 app.post("/login", async (req, res) => {
     console.log(req.body); 
     const { email, password } = req.body;
-
-    console.log(email, password);
     const user = await loginUser(email, password);
 
     if (user) {
         res.cookie('user_id', user.id, { httpOnly: true, expires: 0 });
-        res.redirect('/abe');
+        res.redirect('/home');
     } else {
         res.send('Invalid email or password');
     }

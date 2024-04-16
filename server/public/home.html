@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function logout() {
+            fetch('/logout', { method: 'POST' })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    window.location.href = '/';
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui maxime, temporibus, sint odio veniam cupiditate repellendus dolore quis expedita corporis laboriosam possimus corrupti delectus architecto voluptatum earum a, laudantium necessitatibus?</h1>
+    <button onclick="logout()">Logout</button>
+</body>
+</html>

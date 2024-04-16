@@ -1,0 +1,1 @@
+npm install express, crypto, cookie-parser, mysql2, dotenv
