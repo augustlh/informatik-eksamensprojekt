@@ -1,7 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import { getUserVaults, loginUser, getVaultEntries} from './database.js';
 
+import { getUserVaults, loginUser, getVaultEntries, createUser } from './database.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -32,11 +32,34 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/home', checkCookie, async (req, res) => {
+    // let vaults = await getUserVaults(req.cookies.user_id);
+    // let entries = await getVaultEntries(vaults[0]);
+    // res.json({entries})
     res.sendFile(join(__dirname, 'public', 'home.html'));
-    let vaults = await getUserVaults(req.cookies.user_id);
-    let entries = await getVaultEntries(vaults[0]);
-    console.log(vaults);
-    console.log(entries);
+
+    // console.log(req.cookies.user_id)
+    // console.log(vaults)
+});
+
+// Define route to get entries
+app.get('/entries', checkCookie, async (req, res) => {
+    const userID = req.cookies.user_id;
+    try {
+        const vaults = await getUserVaults(userID);
+        const entries = await getVaultEntries(vaults[0]); // Assuming you're getting entries from the first vault for now
+        res.json({ entries });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to retrieve entries' });
+    }
+});
+
+app.get('/signup', (req, res) => {
+    if (req.cookies.user_id) {
+        res.redirect('/home');
+    } else{
+        res.sendFile(join(__dirname, 'public', 'signup.html'));
+    }
 });
 
 app.post("/create-vault", checkCookie, async (req, res) => {
@@ -52,7 +75,6 @@ app.post("/delete-entry", checkCookie, async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-    console.log(req.body); 
     const { email, password } = req.body;
     const user = await loginUser(email, password);
 
@@ -60,12 +82,24 @@ app.post("/login", async (req, res) => {
         res.cookie('user_id', user.id, { httpOnly: true, expires: 0 });
         res.redirect('/home');
     } else {
-        res.send('Invalid email or password');
+        res.status(401).send('Invalid email or password');
+    }
+});
+
+app.post("/signup", async (req, res) => {
+    const {email, password } = req.body;
+    const user = await createUser("Test", email, password);
+
+    if (user) {
+        res.cookie('user_id', user.id, { httpOnly: true, expires: 0 });
+        res.redirect('/home');
+    } else {
+        res.status(400).send('User already exists');
     }
 });
 
 app.post("/logout", (req, res) => {
-    res.clearCookie('user_id');
+    res.clearCookie('user_id');    
     res.redirect('/');
 });
 
