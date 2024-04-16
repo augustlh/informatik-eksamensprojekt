@@ -60,12 +60,25 @@ async function createUser(name, email, password) {
     return true;
 }
 
+/**
+ * Gets a user from the database by email
+ * @param {string} email 
+ * @returns {Promise} - A promise that resolves to the user
+ * @async
+ */
 async function getUser(email){
     if(!pool) pool = createDatabasePool();
     const [rows] = await pool.promise().query('SELECT * FROM users WHERE email = ?', [email]);
     return rows[0];
 }
 
+/**
+ * Validates a user by email and password
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise} - A promise that resolves to the user if the user is valid, otherwise null
+ * @async
+ */
 async function validateUser(email, password) {
     const user = await getUser(email);
     if (user && user.password === hash(password, user.salt)) {
@@ -74,6 +87,13 @@ async function validateUser(email, password) {
     return null;
 }
 
+/**
+ * Logs in a user by email and password and returns the user if the user is valid
+ * @param {string} email 
+ * @param {string} password 
+ * @returns {Promise} - A promise that resolves to the user if the user is valid, otherwise null
+ * @async
+ */
 async function loginUser(email, password) {
     const user = await validateUser(email, password);
     if (user) {
@@ -85,6 +105,12 @@ async function loginUser(email, password) {
     deleteDatabasePool();
 }
 
+/**
+ * Gets all vaults for a user by id
+ * @param {number} id - The id of the user
+ * @returns {Promise} - A promise that resolves to the vaults
+ * @async
+ */
 async function getUserVaults(id){
     if(!pool) pool = createDatabasePool();
     const [rows] = await pool.promise().query('SELECT * from vaults WHERE user_id = ? ', [id])
@@ -94,6 +120,12 @@ async function getUserVaults(id){
     return rows;
 }
 
+/**
+ * Creates a new vault for a user
+ * @param {object} user - The user object
+ * @param {string} vault_name - The name of the vault
+ * @async
+ */
 async function createVault(user, vault_name){
     if(!pool) pool = createDatabasePool();
     const [existingVault] = await pool.promise().query('SELECT * FROM vaults WHERE user_id = ? AND vault_name = ?', [user.id, vault_name]);
@@ -109,6 +141,12 @@ async function createVault(user, vault_name){
     return true;
 }
 
+/**
+ * Gets all entries for a vault
+ * @param {object} vault - The vault object
+ * @returns {Promise} - A promise that resolves to the entries
+ * @async
+ */
 async function getVaultEntries(vault){
     if(!pool) pool = createDatabasePool();
     const [rows] = await pool.promise().query('SELECT * from entries WHERE vault_id = ? ', [vault.vault_id])
@@ -118,6 +156,16 @@ async function getVaultEntries(vault){
     return rows;
 }
 
+/**
+ * Creates a new entry for a vault
+ * @param {object} vault - The vault object
+ * @param {string} website - The website of the entry
+ * @param {string} username - The username of the entry
+ * @param {string} password - The password of the entry
+ * @param {string} masterpassword - The masterpassword of the user
+ * @returns {Promise} - A promise that resolves to true if the entry is created, false otherwise
+ * @async
+ */
 async function createEntry(vault, website, username, password, masterpassword){
     if(!pool) pool = createDatabasePool();
     const [existingEntry] = await pool.promise().query('SELECT * FROM entries WHERE vault_id = ? AND website = ? AND username = ?', [vault.vault_id, website, username]);
@@ -135,11 +183,25 @@ async function createEntry(vault, website, username, password, masterpassword){
     return true;
 }
 
+/**
+ * Decrypts an entry
+ * @param {object} entry - The entry object
+ * @param {string} masterpassword - The masterpassword of the user
+ * @returns {Promise} - A promise that resolves to the decrypted password
+ * @async
+ */
 async function decryptEntry(entry, masterpassword){
     const decryptedPassword = decrypt(entry.password, masterpassword, entry.iv, entry.salt);
     return decryptedPassword;
 }
 
+/**
+ * Gets all entries for a vault with a specific website
+ * @param {object} vault - The vault object
+ * @param {string} website - The website of the entry
+ * @returns {Promise} - A promise that resolves to the entries
+ * @async
+ */
 async function getEntriesWithWebsite(vault, website){
     if(!pool) pool = createDatabasePool();
     const [rows] = await pool.promise().query('SELECT * from entries WHERE vault_id = ? AND website = ?', [vault.vault_id, website])
