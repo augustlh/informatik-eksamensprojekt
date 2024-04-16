@@ -18,12 +18,9 @@ function checkCookie(req, res, next) {
     if (userID) {
         next();
     } else {
-        //res.status(403).send('<h1>403: Forbidden</h1>');
         res.redirect('/');
     }
 }
-
-//app.use(express.static(join(__dirname, 'public')));
 
 app.get('/', (req, res, next) => {
     const userID = req.cookies && req.cookies.user_id;
@@ -40,6 +37,18 @@ app.get('/home', checkCookie, async (req, res) => {
     let entries = await getVaultEntries(vaults[0]);
     console.log(vaults);
     console.log(entries);
+});
+
+app.post("/create-vault", checkCookie, async (req, res) => {
+    console.log(req.body);
+});
+
+app.post("/create-entry", checkCookie, async (req, res) => {
+    console.log(req.body);
+});
+
+app.post("/delete-entry", checkCookie, async (req, res) => {
+    console.log(req.body);
 });
 
 app.post("/login", async (req, res) => {
