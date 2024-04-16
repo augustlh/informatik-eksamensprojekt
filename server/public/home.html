@@ -6,12 +6,10 @@
     <title>Document</title>
     <script>
         function logout() {
-            fetch('/logout', { method: 'POST' })
-                .then(response => response.text())
-                .then(data => {
-                    alert(data);
-                    window.location.href = '/';
-                });
+            fetch('/logout', { method: 'POST', redirect: 'follow'})
+            .then(response => {
+                window.location.href = response.redirected ? response.url : '/';
+            });
         }
     </script>
 </head>
