@@ -2,9 +2,10 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 
-import { getUserVaults, loginUser, getVaultEntries, createUser } from './database.js';
+import { getUserVaults, loginUser, getVaultEntries, createUser } from './src/database.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import fs from 'fs';
 
 //Defines constants to get filename and directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +23,31 @@ app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store')
     next()
 })
+
+// Middleware function to serve static css files from the public directory
+app.use('/stylesheets', (req, res, next) => {
+    const cssPath = join(__dirname, 'public', 'stylesheets', req.path);
+    fs.readFile(cssPath, 'utf8', (err, data) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        res.type('text/css').send(data);
+    });
+});
+
+// Middleware function to serve static files js from the public directory
+app.use('/scripts', (req, res, next) => {
+    const jsPath = join(__dirname, 'public', 'scripts', req.path);
+    fs.readFile(jsPath, 'utf8', (err, data) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        res.type('application/javascript').send(data);
+    });
+});
+
 
 /**
  * Middleware function to check if the user has a cookie with a user_id.
@@ -53,14 +79,14 @@ app.get('/', (req, res, next) => {
         res.redirect('/home');
     } else {
         // If the user does not have a cookie, the user is served the index.html file
-        res.sendFile(join(__dirname, 'public', 'index.html'));
+        res.sendFile(join(__dirname, 'public', 'views', 'index.html'));
     }
 });
 
 // Route handler for the home page
 app.get('/home', checkCookie, async (req, res) => {
     // Serves the home.html file
-    res.sendFile(join(__dirname, 'public', 'home.html'));
+    res.sendFile(join(__dirname, 'public', 'views', 'home.html'));
 });
 
 
@@ -102,7 +128,7 @@ app.get('/signup', (req, res) => {
         res.redirect('/home');
     } else{
         // Serves the signup.html file
-        res.sendFile(join(__dirname, 'public', 'signup.html'));
+        res.sendFile(join(__dirname, 'public', 'views', 'signup.html'));
     }
 });
 
