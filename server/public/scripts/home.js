@@ -10,7 +10,6 @@ function getVaults(callback) {
     });
 }
 
-
 function getEntries(callback) {
   fetch("/entries")
     .then((response) => response.json())
@@ -19,28 +18,6 @@ function getEntries(callback) {
       entriesData = entries;
       callback(entries);
     });
-
-function decryptEntry(entry, masterpassword){
-   //check if masterpassword is correct
-   //if not update some text to say that the password is incorrect
-   //if correct decrypt the entry
-}
-
-function deleteEntry(entry){
-}
-
-function editEntry(entry){
-}
-
-function getEntries(callback){
-    fetch('/entries')
-        .then(response => response.json())
-        .then(data => {
-            const entries = data.entries;
-            entriesData = entries;
-            callback(entries);
-        });
-
 }
 
 function getUserDetails(callback) {
@@ -64,20 +41,12 @@ function updateEntriesInfo(entries) {
     websitePara.classList.add("entry-website");
     usernamePara.classList.add("entry-username");
 
-
     entry.website = entry.website.split(".")[0];
     entry.website =
       entry.website.charAt(0).toUpperCase() + entry.website.slice(1);
 
     websitePara.textContent = "" + entry.website;
     usernamePara.textContent = "" + entry.username;
-
-        let website = entry.website.split('.')[0];
-        website = website.charAt(0).toUpperCase() + website.slice(1);
-
-        websitePara.textContent = "" + website;
-        usernamePara.textContent = "" + entry.username;
-
 
     entryDiv.appendChild(websitePara);
     entryDiv.appendChild(usernamePara);
@@ -132,49 +101,3 @@ document.querySelector(".entries").addEventListener("click", function (event) {
     console.log(entriesData[clickedEntry.dataset.web_id]);
   }
 });
-
-// variabler for modal
-const modal = document.querySelector("#modal");
-const openModal = document.querySelector("#new-item-btn");
-const closeModal = document.querySelector(".Modal_close");
-// sættter lytter der lytter efter klik for at vise modal
-
-openModal.addEventListener("click", () => {
-  modal.showModal();
-});
-// lukker modal på samme måde som for at vise modal
-closeModal.addEventListener("click", () => {
-  modal.close();
-});
-
-document.addEventListener('DOMContentLoaded', function(){
-    getUserDetails(updateUserInfo);
-    getVaults(updateVaultsInfo);
-    getEntries(updateEntriesInfo);
-
-    var entryInfoElement = document.querySelector('.entry-info-container');
-    if (!selectedEntry) {
-        entryInfoElement.classList.add('hidden');
-    }
-    
-});
-
-document.querySelector('.entries').addEventListener('click', function(event) {
-    const clickedEntry = event.target.closest('.entry');
-    if (clickedEntry) {
-        document.querySelectorAll('.entry').forEach(entry => {
-            entry.classList.remove('entry-selected');
-        });
-        
-        selectedEntry = entriesData[clickedEntry.dataset.web_id];
-        clickedEntry.classList.add('entry-selected');
-        const entryInfoElement = document.querySelector('.entry-info-container');
-        //update entry info
-        document.querySelector('#entry-website').textContent =  entriesData[clickedEntry.dataset.web_id].website;
-        document.querySelector('#entry-username').textContent = selectedEntry.username;
-        document.querySelector('#entry-title').textContent = selectedEntry.website.split('.')[0].charAt(0).toUpperCase() + selectedEntry.website.split('.')[0].slice(1);
-        entryInfoElement.classList.remove('hidden');
-        //console.log(entriesData[clickedEntry.dataset.web_id]);
-    }
-});
-
