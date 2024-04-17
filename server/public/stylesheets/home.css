@@ -440,7 +440,7 @@ button:disabled:hover {
 
 .modal {
   pointer-events: auto;
-  width: 50%; /* Example width, adjust as needed */
+  width: 60%; /* Example width, adjust as needed */
   height: 70%; /* Example height, adjust as needed */
   margin: auto;
   padding: 1em;
@@ -458,16 +458,20 @@ button:disabled:hover {
 }
 
 .modal .container p {
-  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
   margin-top: 10px;
   color: white;
 }
 
 .modal .container form label {
-  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  display:inline-block;
   margin-top: 10px;
   color: white;
 }
+
 
 .modal .container form input {
   border-radius: 5px;

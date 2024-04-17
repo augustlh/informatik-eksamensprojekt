@@ -220,3 +220,12 @@ document.querySelector('#myForm').addEventListener('submit', function(event) {
     });
    
 });
+
+document.getElementById("self-make").addEventListener('change',function(){
+    var passwordField = document.getElementById('passwordField');
+    if (this.checked){
+        passwordField.style.display = 'block';
+    } else {
+        passwordField.style.display = 'none'
+    }
+})

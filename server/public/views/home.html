@@ -156,7 +156,7 @@
                   placeholder="google"
                 />
                 <br />
-                <label for="usname"><i class="usname"></i>Brugernavn</label>
+                <label for="usname"><i class="usname"></i>Username</label>
                 <br />
                 <input
                   type="text"
@@ -165,7 +165,7 @@
                   placeholder="Brugernavn"
                 />
                 <br />
-                <label for="uname"><i class="url-name"></i>Hjemmeside URL</label>
+                <label for="uname"><i class="url-name">Website</i></label>
                 <br />
                 <input
                   type="text"
@@ -173,30 +173,30 @@
                   name="URL"
                   placeholder="www.google.com"
                 />
-                <br />
-                <label for="pword"><i class="pword"></i>Skriv password*</label>
-                <br />
+
+                <div class="checkbox-label">
+                <p> Create passwords yourself</p>
+                <input type="checkbox" id="self-make" name="self-make">
+                </div>
+                <div id="passwordField" style="display: none;">
+                <label for="pword"><i class="pword"></i>Password</label>
                 <input
                   type="text"
                   id="pword"
                   name="pword"
                   placeholder="Password"
                 />
-                <p>
-                  *Kan godt unlades at blive udfyldt, hvis det gøres laves der et
-                  sikert password for dig
-                </p>
-  
+            </div>
                 <input
                   id="Modal_close"
                   type="submit"
-                  value="Lav password"
+                  value="Save password"
                   class="btn"
                 />
               </div>
             </form>
           </div>
-          <button id="Modal_close" class="Modal_close">Annuller</button>
+          <button id="Modal_close" class="Modal_close">Cancel</button>
         </dialog>
       </div>
 
