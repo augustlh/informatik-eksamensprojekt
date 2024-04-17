@@ -79,10 +79,65 @@
 
     <main class="main">
         <div class="entries">
-            <!-- Entries will be displayed here -->
+            <!-- Entries her -->
         </div>
         <div class="entry-info">
-            <!-- Selected entry info will be displayed here -->
+            <div class="entry-info-container">
+                <div class = "entry-info-navbar">
+                    <button id="edit-entry-btn">
+                        <i class="ph ph-pencil"></i> Edit
+                    </button>
+                    <button id="delete-entry-btn">
+                        <i class="ph ph-trash"></i> Delete
+                    </button>
+                </div>
+
+                <div class="entry-header">
+                    <h1 class="entry-title" id="entry-title">Title</h1>
+                </div>
+
+                <div class="entry-info-content">
+                    <div class="entry-item">
+                        <p class="title">Username</p>
+                        <ul>
+                            <li>
+                                <a>
+                                    <i class="ph ph-user"></i>
+                                    <span class = "text" id="entry-username">Coom</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="entry-item">
+                        <p class="title">Password</p>
+                        <ul>
+                            <li>
+                                <a>
+                                    <i class="ph ph-key"></i>
+                                    <span class = "text">••••••••••</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="entry-item">
+                        <p class="title">Website</p>
+                        <ul>
+                            <li>
+                                <a>
+                                    <i class="ph ph-globe"></i>
+                                    <span class = "text" id="entry-website">Coom</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="decrypt-entry">
+                        <input type="password" placeholder="Enter your master password to decrypt this entry">
+                        <button id="decrypt-entry-btn">
+                            <i class="ph ph-lock-open"></i> Decrypt
+                        </button>
+                    </div>
+                </div>
+            </div> 
         </div>
     </main>
     
