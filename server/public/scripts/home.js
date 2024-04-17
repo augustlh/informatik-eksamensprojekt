@@ -192,3 +192,31 @@ openModal.addEventListener("click", () => {
 closeModal.addEventListener("click", () => {
   modal.close();
 });
+
+document.querySelector('#myForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+    // Extract form data
+    const website = document.querySelector('#wname').value;
+    const username = document.querySelector('#usname').value;
+    const url = document.querySelector('#uname').value;
+    const password = document.querySelector('#pword').value;
+    console.log(typeof password)
+    // Send data to the server
+    fetch('/create-entry', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ website, username, url, password })
+    }).then(response => response.json()).then(data => {
+        if (data.success) {
+            modal.close(); // Close the modal
+            window.location.reload(); // Reload the page to see the new entry
+        } else {
+            alert("Failed to create entry");
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+   
+});

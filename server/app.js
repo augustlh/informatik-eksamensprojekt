@@ -2,7 +2,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 
-import { getUserVaults, loginUser, getVaultEntries, createUser, getUserById, isPasswordCorrect, decryptEntry, deleteEntry} from './src/database.js';
+import { getUserVaults, loginUser, getVaultEntries, createUser, getUserById, isPasswordCorrect, decryptEntry, deleteEntry, createEntry} from './src/database.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
@@ -149,6 +149,7 @@ app.get('/user', checkCookie, async (req, res) => {
 app.get('/signup', (req, res) => {
     // Checks if the user has a cookie with a user_id and redirects to the home page if the user has a cookie
     if (req.cookies.user_id) {
+        res.cookie('masterpassword', password, { httpOnly: true, expires: 0 })
         res.redirect('/home');
     } else{
         // Serves the signup.html file
@@ -164,7 +165,20 @@ app.post("/create-vault", checkCookie, async (req, res) => {
 
 // Route handler to create an entry
 app.post("/create-entry", checkCookie, async (req, res) => {
-    console.log(req.body);
+    const { website, username, url, password } = req.body;
+    const userID = req.cookies.user_id;
+    const user = await getUserById(userID);
+    const vaults = await getUserVaults(userID);
+    const vault = vaults[0]; // Assuming the first vault for now
+    console.log(password)
+
+    const result = await createEntry(vault, url, username, password, req.cookies.masterpassword);
+
+    if (result) {
+        res.json({ success: true });
+    } else {
+        res.json({ success: false });
+    }
 });
 
 // Route handler to delete an entry
@@ -213,6 +227,7 @@ app.post("/login", async (req, res) => {
     if (user) {
         // If the user is successfully logged in, a cookie with the user_id is set and the user is redirected to the home page
         res.cookie('user_id', user.id, { httpOnly: true, expires: 0 });
+        res.cookie('masterpassword', password, { httpOnly: true, expires: 0 })
         res.redirect('/home');
     } else {
         // res.status(401).send('Invalid email or password');
@@ -242,7 +257,8 @@ app.post("/signup", async (req, res) => {
 // Route handler to logout
 app.post("/logout", (req, res) => {
     //Deletes the cookie with the user_id and redirects to the root page
-    res.clearCookie('user_id');    
+    res.clearCookie('user_id');
+    res.clearCookie('masterpassword)')
     res.redirect('/');
 });
 
@@ -263,3 +279,4 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
     console.log("App listening on port 3000")
 })
+
