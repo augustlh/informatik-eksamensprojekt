@@ -48,6 +48,7 @@ body {
 .search input[type="text"]::placeholder {
   color: #999;
   text-align: center;
+  font-size: 14px;
 }
 
 .search input[type="text"]:focus {
@@ -257,6 +258,7 @@ body {
   font-size: 20px;
 }
 
+
 .modal-container {
   display: flex;
   justify-content: center;
@@ -333,3 +335,146 @@ body {
   cursor: pointer;
   background-color: var(--hover-color);
 }
+
+
+/* Entry gøj */
+
+.entry-info-navbar{
+  display: flex;
+  margin: 10px;
+  justify-content: flex-end;
+
+}
+
+.entry-info-navbar button {
+  padding: 8px 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--button-color);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.entry-info-navbar button:hover {
+  background-color: var(--hover-color);
+}
+
+.entry-info-navbar button + button {
+  margin-left: 10px;
+}
+
+.entry-info{
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+
+}
+
+.entry-header {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #fff
+}
+
+.entry-item {
+  font-family: Arial,sans-serif;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.entry-item .title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #e0dede;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  border-bottom: 2px solid #2b9bcf34;
+}
+
+.entry-item ul li {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.entry-item ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 8px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  border: 1px solid #1c1f23;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.entry-item ul li:hover a {
+  background-color: #518ec71c;
+  cursor: pointer;
+}
+
+.entry-item ul li.active a {
+  background-color: #518ec775;
+}
+
+.entry-item  ul li .icon {
+  font-size: 20px;
+}
+
+.decrypt-entry {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.decrypt-entry input[type="password"] {
+  /*padding: 10px 200px;*/
+  /* make it bigger but do not use padding */
+  height: 40px;
+  width: 400px;
+  border-radius: 10px;
+  border: 1px solid #2a2e33;
+  background-color: #2a2e33;
+  color: #666;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.decrypt-entry input[type="password"]::placeholder {
+  color: #999;
+  text-align: flex-start;
+  font-size: 14px;
+}
+
+.decrypt-entry input[type="password"]:focus {
+  outline: none;
+}
+
+.decrypt-entry button {
+  padding: 8px 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--button-color);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.decrypt-entry button:hover {
+  background-color: var(--hover-color);
+}
+
+
+.hidden {
+  display: none;
+}
+
