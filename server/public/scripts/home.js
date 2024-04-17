@@ -102,6 +102,29 @@ document.querySelector(".entries").addEventListener("click", function (event) {
   }
 });
 
+document.querySelector(".entries").addEventListener("click", function (event) {
+  const clickedEntry = event.target.closest(".entry");
+  if (clickedEntry) {
+    document.querySelectorAll(".entry").forEach((entry) => {
+      entry.classList.remove("entry-selected");
+    });
+
+    selectedEntry = entriesData[clickedEntry.dataset.web_id];
+    clickedEntry.classList.add("entry-selected");
+    const entryInfoElement = document.querySelector(".entry-info-container");
+    //update entry info
+    document.querySelector("#entry-website").textContent =
+      entriesData[clickedEntry.dataset.web_id].website;
+    document.querySelector("#entry-username").textContent =
+      selectedEntry.username;
+    document.querySelector("#entry-title").textContent =
+      selectedEntry.website.split(".")[0].charAt(0).toUpperCase() +
+      selectedEntry.website.split(".")[0].slice(1);
+    entryInfoElement.classList.remove("hidden");
+    //console.log(entriesData[clickedEntry.dataset.web_id]);
+  }
+});
+
 const modal = document.querySelector("#modal");
 const openModal = document.querySelector("#new-item-btn");
 const closeModal = document.querySelector(".Modal_close");
