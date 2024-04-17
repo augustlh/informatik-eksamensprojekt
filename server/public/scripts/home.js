@@ -180,3 +180,15 @@ document.querySelector('#decrypt-entry-btn').addEventListener('click', function(
 document.querySelector('#delete-entry-btn').addEventListener('click', function(){
     deleteEntry(selectedEntry);
 });
+
+const modal = document.querySelector("#modal");
+const openModal = document.querySelector("#new-item-btn");
+const closeModal = document.querySelector(".Modal_close");
+
+openModal.addEventListener("click", () => {
+  modal.showModal();
+});
+// lukker modal på samme måde som for at vise modal
+closeModal.addEventListener("click", () => {
+  modal.close();
+});
