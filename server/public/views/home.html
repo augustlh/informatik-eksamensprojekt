@@ -1,83 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="stylesheets/home.css">
+    <link rel="stylesheet" href="stylesheets/home.css" />
     <title>OnePass - Home</title>
     <script>
-        function logout() {
-            fetch('/logout', { method: 'POST', redirect: 'follow'})
-            .then(response => {
-                window.location.href = response.redirected ? response.url : '/';
-            });
-        }
-
+      function logout() {
+        fetch("/logout", { method: "POST", redirect: "follow" }).then(
+          (response) => {
+            window.location.href = response.redirected ? response.url : "/";
+          }
+        );
+      }
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <header class="navbar">
-        <div class="container">
-            <div class="search">
-                <input type="text" placeholder="Search for logins (not yet implemented)" disabled>
-            </div>
-
-            <div class="buttons">
-                <button id="new-item-btn">
-                    <i class="ph ph-plus"></i> New Item
-                </button>
-            </div>
-            
+      <div class="container">
+        <div class="search">
+          <input
+            type="text"
+            placeholder="Search for logins (not yet implemented)"
+            disabled
+          />
         </div>
+
+        <div class="buttons">
+          <button id="new-item-btn"><i class="ph ph-plus"></i> New Item</button>
+        </div>
+      </div>
     </header>
 
     <section class="sidebar">
-        <div class="logo">
-                <span class="logo-text">OnePass</span>
-        </div>
+      <div class="logo">
+        <span class="logo-text">OnePass</span>
+      </div>
 
-        <div class="head">
-            <div class="user-info">
-                <p class="name"></p>
-                <p class="email"></p>
-            </div>
+      <div class="head">
+        <div class="user-info">
+          <p class="name"></p>
+          <p class="email"></p>
         </div>
-        <div class="nav">
-            <div class="menu">
-                <p class="title">Main</p>
-                <ul>
-                    <li class="active">
-                        <a href="home">
-                            <i class="ph ph-key"></i>
-                            <span class = "text">All Entries</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="menu">
-                <p class="title">Vaults</p>
-                <ul class="vault-list">
-                    <!-- Her tilføjes vaults dynamisk -->
-                </ul>
-            </div>
+      </div>
+      <div class="nav">
+        <div class="menu">
+          <p class="title">Main</p>
+          <ul>
+            <li class="active">
+              <a href="home">
+                <i class="ph ph-key"></i>
+                <span class="text">All Entries</span>
+              </a>
+            </li>
+          </ul>
         </div>
         <div class="menu">
-            <p class="title">Account</p>
-            <ul>
-                <li>
-                    <a onclick="logout()">
-                        <i class="ph ph-sign-out"></i>
-                        <span class = "text">Logout</span>
-                    </a>
-                </li>
-                
-            </ul>
+          <p class="title">Vaults</p>
+          <ul class="vault-list">
+            <!-- Her tilføjes vaults dynamisk -->
+          </ul>
         </div>
+      </div>
+      <div class="menu">
+        <p class="title">Account</p>
+        <ul>
+          <li>
+            <a onclick="logout()">
+              <i class="ph ph-sign-out"></i>
+              <span class="text">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
 
-
     <main class="main">
+
+      <div class="entries">
+        <!-- Entries will be displayed here -->
+      </div>
+      <div class="entry-info">
+        <!-- Selected entry info will be displayed here -->
+      </div>
+
         <div class="entries">
             <!-- Entries her -->
         </div>
@@ -139,9 +146,68 @@
                 </div>
             </div> 
         </div>
-    </main>
-    
 
+    </main>
+
+    <div class="modal-container">
+      <dialog class="modal" id="modal">
+        <div class="container">
+          <form action="" id="myForm">
+            <div class="row">
+              <p>Opret password</p>
+              <br />
+              <label for="wname"><i class="web-name"></i>Hjemmeside navn</label>
+              <br />
+              <input
+                type="text"
+                id="wname"
+                name="Website"
+                placeholder="google"
+              />
+              <br />
+              <label for="usname"><i class="usname"></i>Brugernavn</label>
+              <br />
+              <input
+                type="text"
+                id="usname"
+                name="Username"
+                placeholder="Brugernavn"
+              />
+              <br />
+              <label for="uname"><i class="url-name"></i>Hjemmeside URL</label>
+              <br />
+              <input
+                type="text"
+                id="uname"
+                name="URL"
+                placeholder="www.google.com"
+              />
+              <br />
+              <label for="pword"><i class="pword"></i>Skriv password*</label>
+              <br />
+              <input
+                type="text"
+                id="pword"
+                name="pword"
+                placeholder="Password"
+              />
+              <p>
+                *Kan godt unlades at blive udfyldt, hvis det gøres laves der et
+                sikert password for dig
+              </p>
+
+              <input
+                id="Modal_close"
+                type="submit"
+                value="Lav password"
+                class="btn"
+              />
+            </div>
+          </form>
+        </div>
+        <button id="Modal_close" class="Modal_close">Annuller</button>
+      </dialog>
+    </div>
     <script src="scripts/home.js"></script>
-</body>
+  </body>
 </html>
