@@ -2,7 +2,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 
-import { getUserVaults, loginUser, getVaultEntries, createUser, getUserById } from './src/database.js';
+import { getUserVaults, loginUser, getVaultEntries, createUser, getUserById, isPasswordCorrect, decryptEntry, deleteEntry} from './src/database.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
@@ -15,6 +15,7 @@ const __dirname = dirname(__filename);
 const app = express();
 
 //Configures the Express application
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -168,7 +169,37 @@ app.post("/create-entry", checkCookie, async (req, res) => {
 
 // Route handler to delete an entry
 app.post("/delete-entry", checkCookie, async (req, res) => {
-    console.log(req.body);
+    await deleteEntry(req.body.entry);
+    res.json({ success: true });
+});
+
+
+app.post("/decrypt-entry", checkCookie, async (req, res) => {
+    const entry = req.body.entry;
+    const masterpassword = req.body.masterpassword;
+
+    const decrypted = await decryptEntry(entry, masterpassword);
+
+    if (decrypted) {
+        res.json({ success: true, password: decrypted });
+    } else {
+        res.json({ success: false });
+    }
+});
+
+
+app.post("/validate-password", checkCookie, async (req, res) => {
+    const userID = req.cookies.user_id;
+    const user = await getUserById(userID);
+    const password = req.body.password;
+
+    const result = await isPasswordCorrect(user.email, password);
+
+    if (result) {
+        res.json({ success: true });
+    } else {
+        res.json({ success: false });
+    }
 });
 
 // Route handler to login
@@ -184,7 +215,10 @@ app.post("/login", async (req, res) => {
         res.cookie('user_id', user.id, { httpOnly: true, expires: 0 });
         res.redirect('/home');
     } else {
-        res.status(401).send('Invalid email or password');
+        // res.status(401).send('Invalid email or password');
+        //it should just say there was an error
+        //make a html alert but stay on the same page
+        res.status(400).send('Invalid email or password');
     }
 });
 

@@ -63,3 +63,12 @@ export function hash(...args){
 export function generateSalt() {
     return crypto.randomBytes(16).toString('hex');
 }
+
+export function generatePassword(length) {
+    const charset = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ÆØÅ*!@#$%^&()_-+=<>?/{}[]|~";
+    let password = "";
+    for (let i = 0; i < length; i++) {
+        password += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+    return password;
+}

@@ -93,6 +93,14 @@ async function validateUser(email, password) {
     return null;
 }
 
+async function isPasswordCorrect(email, password){
+    const user = await getUser(email);
+    if (user && user.password === hash(password, user.salt)) {
+        return true;
+    }
+    return false;
+}
+
 /**
  * Logs in a user by email and password and returns the user if the user is valid
  * @param {string} email 
@@ -217,8 +225,13 @@ async function getEntriesWithWebsite(vault, website){
     return rows;
 }
 
+async function deleteEntry(entry){
+    if(!pool) pool = createDatabasePool();
+    await pool.promise().query('DELETE FROM entries WHERE entry_id = ?', [entry.entry_id]); 
+}
+
 async function logoutUser() {
     deleteDatabasePool();
 }
 
-export { createDatabasePool, createUser, loginUser, logoutUser, getUserVaults, createVault, getVaultEntries, createEntry, decryptEntry, getEntriesWithWebsite, deleteDatabasePool, getUser, validateUser, getUserById};
+export { createDatabasePool, createUser, loginUser, logoutUser, getUserVaults, createVault, getVaultEntries, createEntry, deleteEntry, decryptEntry, getEntriesWithWebsite, deleteDatabasePool, getUser, validateUser, getUserById, isPasswordCorrect};
