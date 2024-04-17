@@ -133,6 +133,7 @@ body {
 
 .entry:hover {
   background-color: #1363be49;
+  cursor: pointer;
 }
 
 .entry-website {
@@ -268,6 +269,7 @@ body {
 
 }
 
+
 .entry-info-navbar button {
   padding: 8px 30px;
   border: none;
@@ -284,6 +286,20 @@ body {
 
 .entry-info-navbar button + button {
   margin-left: 10px;
+}
+
+#delete-entry-btn {
+  padding: 8px 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff0000; /* Red color */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#delete-entry-btn:hover {
+  background-color: #ff3333; /* Darker red on hover */
 }
 
 .entry-info{
@@ -360,7 +376,6 @@ body {
 
 .decrypt-entry input[type="password"] {
   /*padding: 10px 200px;*/
-  /* make it bigger but do not use padding */
   height: 40px;
   width: 400px;
   border-radius: 10px;
@@ -398,4 +413,15 @@ body {
 
 .hidden {
   display: none;
+}
+
+button:disabled {
+  background-color: grey;
+  color: white;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background-color: grey;
+  color: white;
 }

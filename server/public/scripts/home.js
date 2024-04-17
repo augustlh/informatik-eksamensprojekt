@@ -8,13 +8,62 @@ function getVaults(callback){
     });
 }
 
-function decryptEntry(entry, masterpassword){
-   //check if masterpassword is correct
-   //if not update some text to say that the password is incorrect
-   //if correct decrypt the entry
+async function validatePassword(password) {
+    let result = false;
+    await fetch('/validate-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ password })
+    }).then(response => response.json()).then(data => {
+        result = data.success;
+    });
+    return result;
+}
+
+async function decryptEntry(entry, masterpassword){
+    const ev = await validatePassword(masterpassword);
+
+    if(ev){
+        fetch('/decrypt-entry', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ entry, masterpassword })
+        }).then(response => response.json()).then(data => {
+            if(data.success){
+                    document.querySelector('#entry-password').textContent =  data.password;
+            } else {
+                console.log("Failed to decrypt entry");
+            }
+        });
+    }else{
+        alert("Wrong password");
+    
+    }
 }
 
 function deleteEntry(entry){
+    //Ask for confirmation
+    if(!confirm("Are you sure you want to delete this entry?")) return;
+
+    fetch('/delete-entry', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ entry })
+    }).then(response => response.json()).then(data => {
+        if(data.success){
+            console.log("Entry deleted");
+            alert("Entry deleted with username: " + entry.username + " and website: " + entry.website);
+            window.location.reload();
+        } else {
+            console.log("Failed to delete entry");
+        }
+    });
 }
 
 function editEntry(entry){
@@ -118,7 +167,16 @@ document.querySelector('.entries').addEventListener('click', function(event) {
         document.querySelector('#entry-website').textContent =  entriesData[clickedEntry.dataset.web_id].website;
         document.querySelector('#entry-username').textContent = selectedEntry.username;
         document.querySelector('#entry-title').textContent = selectedEntry.website.split('.')[0].charAt(0).toUpperCase() + selectedEntry.website.split('.')[0].slice(1);
+        document.querySelector('#entry-password').textContent = "••••••••••";
         entryInfoElement.classList.remove('hidden');
-        //console.log(entriesData[clickedEntry.dataset.web_id]);
     }
+});
+
+document.querySelector('#decrypt-entry-btn').addEventListener('click', function(){
+    const masterpassword = document.querySelector('#masterpassword').value;
+    decryptEntry(selectedEntry, masterpassword);
+});
+
+document.querySelector('#delete-entry-btn').addEventListener('click', function(){
+    deleteEntry(selectedEntry);
 });

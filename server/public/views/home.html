@@ -25,7 +25,7 @@
 
             <div class="buttons">
                 <button id="new-item-btn">
-                    <i class="ph ph-plus"></i> New Item
+                    <i class="ph ph-plus"></i> New Entry
                 </button>
             </div>
             
@@ -84,7 +84,7 @@
         <div class="entry-info">
             <div class="entry-info-container">
                 <div class = "entry-info-navbar">
-                    <button id="edit-entry-btn">
+                    <button id="edit-entry-btn" disabled>
                         <i class="ph ph-pencil"></i> Edit
                     </button>
                     <button id="delete-entry-btn">
@@ -114,7 +114,7 @@
                             <li>
                                 <a>
                                     <i class="ph ph-key"></i>
-                                    <span class = "text">••••••••••</span>
+                                    <span class = "text" id="entry-password">••••••••••</span>
                                 </a>
                             </li>
                         </ul>
@@ -131,7 +131,7 @@
                         </ul>
                     </div>
                     <div class="decrypt-entry">
-                        <input type="password" placeholder="Enter your master password to decrypt this entry">
+                        <input type="password" id="masterpassword" placeholder="Enter your master password to decrypt this entry">
                         <button id="decrypt-entry-btn">
                             <i class="ph ph-lock-open"></i> Decrypt
                         </button>
