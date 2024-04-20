@@ -103,7 +103,7 @@
                             <li>
                                 <a>
                                     <i class="ph ph-user"></i>
-                                    <span class = "text" id="entry-username">Coom</span>
+                                    <span class = "text" id="entry-username">Placeholder</span>
                                 </a>
                             </li>
                         </ul>
@@ -125,15 +125,15 @@
                             <li>
                                 <a>
                                     <i class="ph ph-globe"></i>
-                                    <span class = "text" id="entry-website">Coom</span>
+                                    <span class = "text" id="entry-website">Placeholder</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="decrypt-entry">
-                        <input type="password" id="masterpassword" placeholder="Enter your master password to decrypt this entry">
+                        <!-- <input type="password" id="masterpassword" placeholder="Enter your master password to decrypt this entry"> -->
                         <button id="decrypt-entry-btn">
-                            <i class="ph ph-lock-open"></i> Decrypt
+                            <i class="ph ph-lock-open"></i> Decrypt password
                         </button>
                     </div>
                 </div>
@@ -145,15 +145,15 @@
           <div class="container">
             <form action="" id="myForm">
               <div class="row">
-                <p>Opret password</p>
+                <p>Create Entry</p>
                 <br />
-                <label for="wname"><i class="web-name"></i>Hjemmeside navn</label>
+                <label for="wname"><i class="web-name"></i>Name of the website</label>
                 <br />
                 <input
                   type="text"
                   id="wname"
                   name="Website"
-                  placeholder="google"
+                  placeholder="E.g. Google"
                 />
                 <br />
                 <label for="usname"><i class="usname"></i>Username</label>
@@ -162,7 +162,7 @@
                   type="text"
                   id="usname"
                   name="Username"
-                  placeholder="Brugernavn"
+                  placeholder="Username/Email"
                 />
                 <br />
                 <label for="uname"><i class="url-name">Website</i></label>
@@ -171,26 +171,26 @@
                   type="text"
                   id="uname"
                   name="URL"
-                  placeholder="www.google.com"
+                  placeholder="E.g. google.com"
                 />
 
                 <div class="checkbox-label">
-                <p> Create passwords yourself</p>
+                <p> Want to create/use your own password?</p>
                 <input type="checkbox" id="self-make" name="self-make">
                 </div>
                 <div id="passwordField" style="display: none;">
                 <label for="pword"><i class="pword"></i>Password</label>
                 <input
-                  type="text"
+                  type="password"
                   id="pword"
                   name="pword"
-                  placeholder="Password"
+                  placeholder="Please enter your own password"
                 />
             </div>
                 <input
                   id="Modal_close"
                   type="submit"
-                  value="Save password"
+                  value="Save Entry"
                   class="btn"
                 />
               </div>

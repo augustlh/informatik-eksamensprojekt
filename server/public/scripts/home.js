@@ -22,7 +22,18 @@ async function validatePassword(password) {
     return result;
 }
 
-async function decryptEntry(entry, masterpassword){
+async function decryptEntry(entry){
+    let masterpassword = "";
+    await fetch('/get-masterpassword', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json()).then(data => {
+        masterpassword = data.masterpassword;
+    });
+
+
     const ev = await validatePassword(masterpassword);
 
     if(ev){
@@ -173,8 +184,8 @@ document.querySelector('.entries').addEventListener('click', function(event) {
 });
 
 document.querySelector('#decrypt-entry-btn').addEventListener('click', function(){
-    const masterpassword = document.querySelector('#masterpassword').value;
-    decryptEntry(selectedEntry, masterpassword);
+    //const masterpassword = document.querySelector('#masterpassword').value;
+    decryptEntry(selectedEntry);
 });
 
 document.querySelector('#delete-entry-btn').addEventListener('click', function(){
@@ -193,14 +204,91 @@ closeModal.addEventListener("click", () => {
   modal.close();
 });
 
+function checkPasswordAndUser(email, password){
+    // Checks if the password is atleast 15 characters long
+    if(password.length < 15){
+        return false;
+    }
+
+    //Check if password contains the username
+    if(password.includes(email)){
+        return false;
+    }
+
+    //checks if password contains atleast 1 uppercase letter
+    let hasUpperCase = /[A-Z]/.test(password);
+    if(!hasUpperCase){
+        return false;
+    }
+
+    //checks if password contains atleast 1 lowercase letter
+    let hasLowerCase = /[a-z]/.test(password);
+    if(!hasLowerCase){
+        return false;
+    }
+
+    //checks if password contains atleast 1 number
+    let hasNumber = /\d/.test(password);
+    if(!hasNumber){
+        return false;
+    }
+
+    return true
+    
+}
+
+function generatePassword(length) {
+    const charset = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ÆØÅ*!@#$%^&()_-+=<>?/{}[]|~";
+    let password = "";
+    for (let i = 0; i < length; i++) {
+        password += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+    return password;
+}
+
+
 document.querySelector('#myForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from submitting normally
     // Extract form data
     const website = document.querySelector('#wname').value;
     const username = document.querySelector('#usname').value;
     const url = document.querySelector('#uname').value;
-    const password = document.querySelector('#pword').value;
-    console.log(typeof password)
+    let password = document.querySelector('#pword').value;
+
+    //check if website, username and url is empty
+    if(website === "" || username === "" || url === ""){
+        alert("Please fill out required fields");
+        return;
+    }
+
+    let choice = false;
+
+    //check if user has set their own password and check if its strong
+    if(document.getElementById("self-make").checked){
+        if (password === "") {
+            alert("Password cannot be empty");
+            return;
+        }
+
+        if(password.length > 30){
+            alert("Password cannot be longer than 30 characters");
+            return;
+        }
+
+        if(!checkPasswordAndUser(username, password)){
+            //if password is not strong enough, we ask the user if they want to generate a password or keep the current one. Aftrwards we check if the password is empty
+            choice = confirm("Entered password is weak. Press Okay to keep your password or Cancel to get a safe auto-generated password");
+            if(!choice){
+                password = generatePassword(30);
+            }
+        }
+    }
+
+    //if password is an empty string, we make a new password
+    if(password === ""){
+        password = generatePassword(30);
+    }
+
     // Send data to the server
     fetch('/create-entry', {
         method: 'POST',

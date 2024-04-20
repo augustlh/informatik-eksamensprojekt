@@ -118,6 +118,10 @@ app.get('/entries', checkCookie, async (req, res) => {
     }
 });
 
+app.get('/get-masterpassword', (req, res) => {
+    res.json({ masterpassword: req.cookies.masterpassword });
+});
+
 // Route handler to get vaults
 app.get('/vaults', checkCookie, async (req, res) => {
     // Gets the user_id from the cookie
@@ -170,7 +174,6 @@ app.post("/create-entry", checkCookie, async (req, res) => {
     const user = await getUserById(userID);
     const vaults = await getUserVaults(userID);
     const vault = vaults[0]; // Assuming the first vault for now
-    console.log(password)
 
     const result = await createEntry(vault, url, username, password, req.cookies.masterpassword);
 
@@ -237,18 +240,63 @@ app.post("/login", async (req, res) => {
     }
 });
 
+function checkPasswordAndUser(email, password){
+    // Checks if the password is atleast 15 characters long
+    if(password.length < 15){
+        return false;
+    }
+
+    //Makes sure the password doesnt contain user sensitive information
+    if(password.includes(email)){
+        return false;
+    }
+
+
+    //checks if password contains atleast 1 uppercase letter
+    let hasUpperCase = /[A-Z]/.test(password);
+    if(!hasUpperCase){
+        return false;
+    }
+
+    //checks if password contains atleast 1 lowercase letter
+    let hasLowerCase = /[a-z]/.test(password);
+    if(!hasLowerCase){
+        return false;
+    }
+
+    //checks if password contains atleast 1 number
+    let hasNumber = /\d/.test(password);
+    if(!hasNumber){
+        return false;
+    }
+
+    return true
+    
+}
+
 // Route handler to signup
 app.post("/signup", async (req, res) => {
     // Gets the email and password from the request body
     const {email, password } = req.body;
+
+    //checks if the password is valid
+    if(!checkPasswordAndUser(email, password)){
+        res.status(400).send('Password is not strong enough. Ensure it is atleast 15 characters long and contains atleast 1 uppercase letter, 1 lowercase letter and 1 number. It should also not contain any information about you.');
+        return;
+    }
+
+    if (password.length > 30) {
+        res.status(400).send('Password is too long. Maximum length is 30 characters.');
+        return;
+    }
 
     // Calls the createUser function with the email and password
     const user = await createUser("Test", email, password);
 
     if (user) {
         // If the user is successfully created, a cookie with the user_id is set and the user is redirected to the home page
-        res.cookie('user_id', user.id, { httpOnly: true, expires: 0 });
-        res.redirect('/home');
+        //res.cookie('user_id', user.id, { httpOnly: true, expires: 0 });
+        res.redirect('/');
     } else {
         res.status(400).send('User already exists');
     }
