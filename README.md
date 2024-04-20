@@ -26,11 +26,11 @@ To access the website please go to following url in your preferred browser:
 
 We have setup a test-user with a simple username and password, so you are not required to set your own 15+ long character password:
 
-- `username: frederik@horup.dk`
-- `password: horup`
+- username: `frederik@horup.dk`
+- password: `horup`
 
 If you wish to create your own user below you can find a password that you can copy and paste:
-- `password: æYFhexIVP#Smr$d<O=HÅIy_8nAhYÆÅ`
+- password: `æYFhexIVP#Smr$d<O=HÅIy_8nAhYÆÅ`
 
 ## Dependencies
 
