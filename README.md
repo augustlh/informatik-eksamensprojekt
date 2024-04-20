@@ -1,6 +1,6 @@
 ## Installation of node_modules
 
-If the node_moudles folder does not exist in `./server` please install the node_modules manually. To install node_modules please run the following commands in the terminal:
+If the node_modules folder does not exist in `./server` please install the node_modules manually. To install node_modules please run the following commands in the terminal:
 
 `cd server`
 
