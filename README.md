@@ -12,9 +12,15 @@ If the node_modules folder does not exist in `./server` please install the node_
 
 ## Start the server
 
-Write the following command into the terminal:
+Access the directory `./server` in the terminal.
 
-`npm run app.js`
+`cd informatk-eksamensprojekt`
+
+`cd server`
+
+Write the following command into the terminal to start the server:
+
+`node app.js`
 
 ## Access the website
 
