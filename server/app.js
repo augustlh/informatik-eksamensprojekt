@@ -49,6 +49,7 @@ app.use('/scripts', (req, res, next) => {
     });
 });
 
+// Middleware function to serve static images from the public directory
 app.use('/images', (req, res, next) => {
     const imagePath = join(__dirname, 'public', 'images', req.path);
     fs.readFile(imagePath, (err, data) => {
