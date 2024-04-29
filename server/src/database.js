@@ -225,11 +225,20 @@ async function getEntriesWithWebsite(vault, website){
     return rows;
 }
 
+/**
+ * Deletes an entry
+ * @param {object} entry - The entry object
+ * @async 
+ */
 async function deleteEntry(entry){
     if(!pool) pool = createDatabasePool();
     await pool.promise().query('DELETE FROM entries WHERE entry_id = ?', [entry.entry_id]); 
 }
 
+/**
+ * Logs out a user
+ * @returns {void}
+ */
 async function logoutUser() {
     deleteDatabasePool();
 }

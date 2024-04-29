@@ -64,6 +64,11 @@ export function generateSalt() {
     return crypto.randomBytes(16).toString('hex');
 }
 
+/**
+ * Generates a random password using a charset
+ * @param {number} length - The length of the password
+ * @returns {string} - A random password
+ */
 export function generatePassword(length) {
     const charset = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ÆØÅ*!@#$%^&()_-+=<>?/{}[]|~";
     let password = "";

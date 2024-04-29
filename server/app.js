@@ -153,6 +153,7 @@ app.get('/user', checkCookie, async (req, res) => {
 app.get('/signup', (req, res) => {
     // Checks if the user has a cookie with a user_id and redirects to the home page if the user has a cookie
     if (req.cookies.user_id) {
+        //creates a cookie with the masterpassword
         res.cookie('masterpassword', password, { httpOnly: true, expires: 0 })
         res.redirect('/home');
     } else{
@@ -191,6 +192,7 @@ app.post("/delete-entry", checkCookie, async (req, res) => {
 });
 
 
+// Route handler to decrypt an entry
 app.post("/decrypt-entry", checkCookie, async (req, res) => {
     const entry = req.body.entry;
     const masterpassword = req.body.masterpassword;
@@ -205,6 +207,7 @@ app.post("/decrypt-entry", checkCookie, async (req, res) => {
 });
 
 
+// Route handler to validate password
 app.post("/validate-password", checkCookie, async (req, res) => {
     const userID = req.cookies.user_id;
     const user = await getUserById(userID);
@@ -240,6 +243,7 @@ app.post("/login", async (req, res) => {
     }
 });
 
+// Function to check if the password is valid
 function checkPasswordAndUser(email, password){
     // Checks if the password is atleast 15 characters long
     if(password.length < 15){

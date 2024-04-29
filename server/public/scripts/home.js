@@ -1,15 +1,19 @@
 let entriesData = [];
 let selectedEntry = null;
 
+// Get the vaults
 function getVaults(callback){
+    // Fetch the vaults from the server
     fetch('/vaults').then(response => response.json()).then(data => {
         const vaults = data.vaults;
         callback(vaults);
     });
 }
 
+// Validate the password
 async function validatePassword(password) {
     let result = false;
+    // Send the password to the server for validation
     await fetch('/validate-password', {
         method: 'POST',
         headers: {
@@ -22,8 +26,10 @@ async function validatePassword(password) {
     return result;
 }
 
+// Decrypt an entry
 async function decryptEntry(entry){
     let masterpassword = "";
+    // Get the masterpassword
     await fetch('/get-masterpassword', {
         method: 'GET',
         headers: {
@@ -33,9 +39,10 @@ async function decryptEntry(entry){
         masterpassword = data.masterpassword;
     });
 
-
+    // Validate the masterpassword
     const ev = await validatePassword(masterpassword);
 
+    // Decrypt the entry
     if(ev){
         fetch('/decrypt-entry', {
             method: 'POST',
@@ -56,10 +63,12 @@ async function decryptEntry(entry){
     }
 }
 
+// Delete an entry
 function deleteEntry(entry){
     //Ask for confirmation
     if(!confirm("Are you sure you want to delete this entry?")) return;
 
+    // Send data to the server
     fetch('/delete-entry', {
         method: 'POST',
         headers: {
@@ -77,9 +86,11 @@ function deleteEntry(entry){
     });
 }
 
+// Edit an entry, not implemented
 function editEntry(entry){
 }
 
+// Get the entries
 function getEntries(callback){
     fetch('/entries')
         .then(response => response.json())
@@ -90,6 +101,7 @@ function getEntries(callback){
         });
 }
 
+// Get the user details
 function getUserDetails(callback){
     fetch('/user')
         .then(response => response.json())
@@ -99,6 +111,7 @@ function getUserDetails(callback){
         });
 }
 
+// Update the entries info
 function updateEntriesInfo(entries){
     const entriesDiv = document.querySelector('.entries');
 
@@ -126,20 +139,24 @@ function updateEntriesInfo(entries){
     });
 }
 
+// Update the vaults info
 function updateVaultsInfo(vaults){
     const vaultList = document.querySelector('.vault-list');
 
     vaults.forEach(vault => {
+        // Create the vault item
         const vaultItem = document.createElement('li');
         const vaultLink = document.createElement('a');
         const vaultIcon = document.createElement('i');
         const vaultText = document.createElement('span');
 
+        // Add classes and text content
         vaultItem.classList.add('vault-item');
         vaultIcon.classList.add('ph', 'ph-vault');
         vaultText.classList.add('text');
         vaultText.textContent = "" + vault.vault_name;
-
+        
+        // Append the elements
         vaultLink.appendChild(vaultIcon);
         vaultLink.appendChild(vaultText);
         vaultItem.appendChild(vaultLink);
@@ -147,12 +164,15 @@ function updateVaultsInfo(vaults){
     });
 }
 
+// Update the user info
 function updateUserInfo(name, email) {
     document.querySelector('.name').textContent = name;
     document.querySelector('.email').textContent = email;
 }
 
+// Event listener for the vaults
 document.addEventListener('DOMContentLoaded', function(){
+    // Get the user details, vaults and entries when the page loads
     getUserDetails(updateUserInfo);
     getVaults(updateVaultsInfo);
     getEntries(updateEntriesInfo);
@@ -164,13 +184,17 @@ document.addEventListener('DOMContentLoaded', function(){
     
 });
 
+// Event listener for the entries
 document.querySelector('.entries').addEventListener('click', function(event) {
     const clickedEntry = event.target.closest('.entry');
     if (clickedEntry) {
+        // Remove the selected class from all entries
         document.querySelectorAll('.entry').forEach(entry => {
             entry.classList.remove('entry-selected');
         });
-        
+
+
+        // Remove the selected class from all entries
         selectedEntry = entriesData[clickedEntry.dataset.web_id];
         clickedEntry.classList.add('entry-selected');
         const entryInfoElement = document.querySelector('.entry-info-container');
@@ -237,6 +261,7 @@ function checkPasswordAndUser(email, password){
     
 }
 
+// Generates a random password
 function generatePassword(length) {
     const charset = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ÆØÅ*!@#$%^&()_-+=<>?/{}[]|~";
     let password = "";
@@ -247,6 +272,7 @@ function generatePassword(length) {
 }
 
 
+// Event listener for the form
 document.querySelector('#myForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from submitting normally
     // Extract form data
@@ -309,6 +335,7 @@ document.querySelector('#myForm').addEventListener('submit', function(event) {
    
 });
 
+// Event listener for the form
 document.getElementById("self-make").addEventListener('change',function(){
     var passwordField = document.getElementById('passwordField');
     if (this.checked){
