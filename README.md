@@ -1,15 +1,3 @@
-## Installation of node_modules
-
-If the node_modules folder does not exist in `./server` please install the node_modules manually. To install node_modules please run the following commands in the terminal:
-
-`cd server`
-
-- `npm install express`
-- `npm install mysql2`
-- `npm install dotenv`
-- `npm install cookie-parser`
-- `npm install crypto`
-
 ## Start the server
 
 Access the directory `./server` in the terminal.
@@ -49,3 +37,15 @@ If you wish to create your own user below you can find a password that you can c
 - `dotenv`
 - `cookie-parser`
 - `crypto`
+
+## Installation of node_modules
+
+If the node_modules folder does not exist in `./server` please install the node_modules manually. To install node_modules please run the following commands in the terminal:
+
+`cd server`
+
+- `npm install express`
+- `npm install mysql2`
+- `npm install dotenv`
+- `npm install cookie-parser`
+- `npm install crypto`
