@@ -14,7 +14,7 @@ If the node_modules folder does not exist in `./server` please install the node_
 
 Access the directory `./server` in the terminal.
 
-`cd informatk-eksamensprojekt`
+`cd informatik-eksamensprojekt`
 
 `cd server`
 
