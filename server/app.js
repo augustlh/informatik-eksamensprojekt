@@ -238,8 +238,6 @@ app.post("/login", async (req, res) => {
         res.redirect('/home');
     } else {
         // res.status(401).send('Invalid email or password');
-        //it should just say there was an error
-        //make a html alert but stay on the same page
         res.status(400).send('Invalid email or password');
     }
 });
